@@ -71,9 +71,6 @@ export default class Weather extends React.Component<
           <h2 className="slice__data__item slice__data__item--city">
             {weather.name}
           </h2>
-        </div>
-
-        <div className="slice__data slice__data--conditions">
           {weather.weather.map(({ description }, index) => (
             <Fragment key={index}>
               <p className="slice__data__item slice__data__item--condition">
@@ -84,37 +81,37 @@ export default class Weather extends React.Component<
         </div>
 
         <div className="slice__data slice__data--period">
-          <span className="slice__data__item slice__data__item--icon">
+          <div className="slice__data__item slice__data__item--icon">
             <FontAwesomeIcon icon={faClock} />
-          </span>
-          <span className="slice__data__item slice__data__item--time">
-            &nbsp;{nowTimeWithOffset(weather.sys.timezone)}
-          </span>
-          <span className="slice__data__item slice__data__item--date">
-            &nbsp;{nowDateWithOffset(weather.sys.timezone)}
-          </span>
+          </div>
+          <div className="slice__data__item slice__data__item--time">
+            {nowTimeWithOffset(weather.sys.timezone)}
+          </div>
+          <div className="slice__data__item slice__data__item--date">
+            {nowDateWithOffset(weather.sys.timezone)}
+          </div>
         </div>
 
         <div className="slice__data slice__data--air">
-          <span className="slice__data__item slice__data__item--icon">
+          <div className="slice__data__item slice__data__item--icon">
             <FontAwesomeIcon icon={faThermometerThreeQuarters} />
-          </span>
-          <span className="slice__data__item slice__data__item--temperature">
+          </div>
+          <div className="slice__data__item slice__data__item--temperature">
             {round(weather.main.temp, 1)} °C <br />
             <small>(feels like {round(weather.main.feels_like, 1)} °C)</small>
-          </span>
+          </div>
         </div>
 
         <div className="slice__data slice__data--wind">
-          <span className="slice__data__item slice__data__item--icon">
+          <div className="slice__data__item slice__data__item--icon">
             <FontAwesomeIcon
               icon={faLocationArrow}
               style={windStyle(weather.wind.deg)}
             />
-          </span>
-          <span className="slice__data__item slice__data__item--wind-speed">
+          </div>
+          <div className="slice__data__item slice__data__item--wind-speed">
             {metresPerSecondtoKilometresPerHour(weather.wind.speed)} km/h
-          </span>
+          </div>
         </div>
       </li>
     );
