@@ -2,7 +2,7 @@ import React from "react";
 import { Fragment } from "react";
 import { WeatherModel } from "../../models/Weather";
 import moment from "moment";
-import { round } from "lodash";
+import { round, upperFirst } from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -33,25 +33,25 @@ export default class Weather extends React.Component<
     }
 
     // CURRENT TIME / DATE
-    const nowTime = moment().format("h:mm");
-    const nowDate = moment().format("D/MMM");
+    // modify to local time, from UTC offset
+    const now = moment();
+    var nowTimeWithOffset = (seconds: number) =>
+      nowInLocalTimezone(seconds).format("h:mm");
+    var nowDateWithOffset = (seconds: number) =>
+      nowInLocalTimezone(seconds).format("D/MMM");
+    var nowInLocalTimezone = (seconds: number) => now.utcOffset(seconds / 60);
 
     // WIND SPEED
     // wind speed is initially metre/second, formula is ( x * 3.6 )
-    function MetresPerSecondtoKilometresPerHour(value: number) {
-      return round(value * 3.6, 1);
-    }
+    var metresPerSecondtoKilometresPerHour = (metres: number) =>
+      round(metres * 3.6, 1);
 
     // WIND DIRECTION ROTATION
     // modify the icon direction by -45deg - it's initial pointing position is top/right
-    function WindRotation(value: number) {
-      return value - 45;
-    }
-
-    // WIND DIRECTION ROTATION STYLE
-    const windStyle = {
-      transform: `rotate(${WindRotation(weather.wind.deg)}deg)`
-    };
+    var windRotation = (degrees: number) => degrees - 45;
+    var windStyle = (degrees: number) => ({
+      transform: `rotate(${windRotation(degrees)}deg)`
+    });
 
     return (
       <div className="slice">
@@ -67,19 +67,29 @@ export default class Weather extends React.Component<
           ))}
         </div>
 
+        <div className="slice__data slice__data--location">
+          <h2 className="slice__data slice__data--city">{weather.name}</h2>
+        </div>
+
+        <div className="slice__data slice__data--conditions">
+          {weather.weather.map(({ description }, index) => (
+            <Fragment key={index}>
+              <p className="slice__data slice__data--condition">
+                {upperFirst(description)}
+              </p>
+            </Fragment>
+          ))}
+        </div>
+
         <div className="slice__data slice__data--period">
           <span className="slice__data__item slice__data__item--icon">
             <FontAwesomeIcon icon={faClock} />
           </span>
-          <span className="slice__data slice__data--time">{nowTime}</span>
-        </div>
-
-        <div className="slice__data slice__data--dateday">
-          <span className="slice__data__item slice__data__item--day">
-            {weather.name}
+          <span className="slice__data__item slice__data__item--time">
+            &nbsp;{nowTimeWithOffset(weather.sys.timezone)}
           </span>
           <span className="slice__data__item slice__data__item--date">
-            &nbsp;{nowDate}
+            &nbsp;{nowDateWithOffset(weather.sys.timezone)}
           </span>
         </div>
 
@@ -95,10 +105,13 @@ export default class Weather extends React.Component<
 
         <div className="slice__data slice__data--wind">
           <span className="slice__data__item slice__data__item--icon">
-            <FontAwesomeIcon icon={faLocationArrow} style={windStyle} />
+            <FontAwesomeIcon
+              icon={faLocationArrow}
+              style={windStyle(weather.wind.deg)}
+            />
           </span>
           <span className="slice__data__item slice__data__item--wind-speed">
-            {MetresPerSecondtoKilometresPerHour(weather.wind.speed)} km/h
+            {metresPerSecondtoKilometresPerHour(weather.wind.speed)} km/h
           </span>
         </div>
       </div>

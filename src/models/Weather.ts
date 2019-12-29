@@ -27,6 +27,7 @@ export type WeatherModel_Clouds = {
 };
 
 export type WeatherModel_Sys = {
+  timezone: number;
   sunrise: number;
   sunset: number;
 };
