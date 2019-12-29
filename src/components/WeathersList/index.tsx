@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Weather from "../Weather";
 import { WeatherModel } from "../../models/Weather";
 
@@ -15,11 +15,11 @@ export default class WeathersList extends React.Component<
 > {
   render() {
     return (
-      <ul>
+      <ul className="slices">
         {this.props.weathers.map((weather: WeatherModel) => (
-          <li key={weather.id}>
+          <Fragment key={weather.id}>
             <Weather weather={weather} />
-          </li>
+          </Fragment>
         ))}
       </ul>
     );

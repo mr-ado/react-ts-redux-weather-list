@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import HomeView from "./home";
 
-import "./App.css";
+import "./App.scss";
 
 const App: React.StatelessComponent<{}> = () => {
   return (

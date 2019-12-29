@@ -54,7 +54,7 @@ export default class Weather extends React.Component<
     });
 
     return (
-      <div className="slice">
+      <li className="slice">
         <div className="wstate-wrap">
           {weather.weather.map(({ description, icon }, index) => (
             <Fragment key={index}>
@@ -68,13 +68,15 @@ export default class Weather extends React.Component<
         </div>
 
         <div className="slice__data slice__data--location">
-          <h2 className="slice__data slice__data--city">{weather.name}</h2>
+          <h2 className="slice__data__item slice__data__item--city">
+            {weather.name}
+          </h2>
         </div>
 
         <div className="slice__data slice__data--conditions">
           {weather.weather.map(({ description }, index) => (
             <Fragment key={index}>
-              <p className="slice__data slice__data--condition">
+              <p className="slice__data__item slice__data__item--condition">
                 {upperFirst(description)}
               </p>
             </Fragment>
@@ -114,7 +116,7 @@ export default class Weather extends React.Component<
             {metresPerSecondtoKilometresPerHour(weather.wind.speed)} km/h
           </span>
         </div>
-      </div>
+      </li>
     );
   }
 }
