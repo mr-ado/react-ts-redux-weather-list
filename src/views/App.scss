@@ -25,7 +25,6 @@ body {
   position: relative;
   width: 100%;
   height: 100vh;
-  transition: -webkit-transform 0.5s;
   transition: transform 0.5s;
 }
 
@@ -137,6 +136,7 @@ body {
 
   @media screen and (min-width: 43.25em) {
     margin: 0.25em 0;
+    font-size: 1.5vw;
   }
 }
 
@@ -156,7 +156,7 @@ body {
 
 .slice__data__item--icon {
   padding: 0.5em 0;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.55);
   font-size: 1.5em;
 
   @media screen and (min-width: 43.25em) {
