@@ -1,5 +1,4 @@
 import React from "react";
-import { Fragment } from "react";
 import { WeatherModel } from "../../models/Weather";
 import moment from "moment";
 import { round, upperFirst } from "lodash";
@@ -57,13 +56,12 @@ export default class Weather extends React.Component<
       <li className="slice">
         <div className="wstate-wrap">
           {weather.weather.map(({ description, icon }, index) => (
-            <Fragment key={index}>
-              <img
-                className="wstate"
-                src={WeatherIcon(icon)}
-                alt={description}
-              />
-            </Fragment>
+            <img
+              key={index}
+              className="wstate"
+              src={WeatherIcon(icon)}
+              alt={description}
+            />
           ))}
         </div>
 
@@ -72,11 +70,12 @@ export default class Weather extends React.Component<
             {weather.name}
           </h2>
           {weather.weather.map(({ description }, index) => (
-            <Fragment key={index}>
-              <p className="slice__data__item slice__data__item--condition">
-                {upperFirst(description)}
-              </p>
-            </Fragment>
+            <p
+              key={index}
+              className="slice__data__item slice__data__item--condition"
+            >
+              {upperFirst(description)}
+            </p>
           ))}
         </div>
 
