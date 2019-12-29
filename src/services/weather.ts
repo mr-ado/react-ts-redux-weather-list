@@ -3,7 +3,7 @@ import initialData from "./data/weather.json";
 
 const API_URL = "https://api.openweathermap.org/data/2.5/group";
 const API_KEY = "8d2de98e089f1c28e1a22fc19a24ef04";
-const CITY_IDS = initialData.map(a => a.id).toString();
+const CITY_IDS = initialData["list"].map(a => a.id).toString();
 const API_OPTIONS = "&units=metric";
 
 const parseJSON = (response: any): any => response.json();

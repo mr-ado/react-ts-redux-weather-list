@@ -37,8 +37,6 @@ class HomeView extends React.Component<HomeViewProps, HomeViewState> {
     if (!this.props.isLoading) {
       return <WeathersList weathers={this.props.weathers} />;
     }
-
-    return "nothing";
   }
 }
 

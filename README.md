@@ -26,7 +26,7 @@ git clone git@github.com:mr-ado/react-ts-redux-weather-list.git
 git clone https://github.com/mr-ado/react-ts-redux-weather-list.git
 ```
 
-2. Install local dependencies with yarm;
+2. Install local dependencies with yarn:
 ```bash
 cd react-ts-redux-weather-list
 yarn install

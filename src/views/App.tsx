@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import HomeView from "./home";
+import HomeView from "./HomeView";
 
 import "./App.scss";
 
