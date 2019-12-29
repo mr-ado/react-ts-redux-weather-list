@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import WeathersList from "../../components/WeathersList";
 import { WeatherModel } from "../../models/Weather";
 import { actionFetchWeathers } from "../../actions";
 import { connect } from "react-redux";
@@ -27,12 +28,17 @@ class HomeView extends React.Component<HomeViewProps, HomeViewState> {
   renderWeathers() {
     if (this.props.isLoading) {
       return <p>Loading ...</p>;
-    } else if (this.props.errorMessage) {
-      return <p>Error: {this.props.errorMessage}</p>;
-    } else if (!this.props.isLoading) {
-      // todo: render our components here
-      return <p>success</p>;
     }
+
+    if (this.props.errorMessage) {
+      return <p>Error: {this.props.errorMessage}</p>;
+    }
+
+    if (!this.props.isLoading) {
+      return <WeathersList weathers={this.props.weathers} />;
+    }
+
+    return "nothing";
   }
 }
 
